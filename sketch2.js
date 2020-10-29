@@ -21,7 +21,7 @@ let doggoSprite;
 let bone;
 let boneY = 450, boneX = 950; //initial position for bone 
 
-let dogX = 100, dogY = -500; //initial position for doggo
+let dogX = 100, dogY = 500; //initial position for doggo
 
 //backgrounnd and foreground//
 let bgX = 0, bgY = 0; //initial position for background and foreground 
@@ -35,6 +35,7 @@ function preload(){
     // bone = loadImage('https://res.cloudinary.com/dsdqeqlzj/image/upload/v1603732830/bone0_pmul7k.png');
     boneAnimation = loadAnimation('bone0.png');
     doggoAnimation = loadAnimation('dong0.png', 'dong5.png');
+    zombieAnimation = loadAnimation('log.png')
 
 
     //doggoImg = loadImage('https://res.cloudinary.com/dsdqeqlzj/image/upload/v1603732830/dong0.png');
@@ -61,12 +62,13 @@ function preload(){
 
 function setup() {
     createCanvas(1600, 850); //it works 
-    doggo = createSprite(200, height/2, 400, 400);
+    doggo = createSprite(200, dogY, 400, 400);
     bone = createSprite(boneX, boneY, 100, 100);
     // boneBuffer = image(bone, boneX, boneY, 200, 200).get(0, 0, 200, 200);
    
     bone.addAnimation('bone', boneAnimation);
      doggo.addAnimation('doggo', doggoAnimation);
+     doggo.addAnimation('zombie', zombieAnimation);
     doggo.scale = 1.3;
 
 
@@ -74,6 +76,7 @@ function setup() {
 
 
 function draw () {
+ 
     image(bgImg, bgX, bgY);
    
         if(!doggoJumping){
@@ -82,6 +85,12 @@ function draw () {
     
     doggo.collide(bone);
 
+    if(doggo.collide(bone)){
+        doggo.changeAnimation('zombie')
+    }
+
+    
+    driftDown();
 
     drawSprites();
     image(fgImg, bgX, bgY);
@@ -92,11 +101,15 @@ function draw () {
 }
 
 function keyPressed(){
-    if (key === ' ') {  
+        
+        if (key === ' ') {  
+            console.log('pressed');
             doggoJumping = true;
-            dogY -= 200; 
+            doggo.position.y -= 200; 
             setTimeout(resetJumping, 500);
         } 
+    
+
 }
 
 function resetJumping(){
@@ -105,6 +118,12 @@ function resetJumping(){
 
 function moveDoggo(){
     doggo.setSpeed(1, 0);
+}
+
+function driftDown(){
+    if(doggo.position.y < dogY){
+        doggo.position.y +=5;
+    }
 }
 
 //function doggoJumping(){}
