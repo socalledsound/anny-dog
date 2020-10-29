@@ -71,7 +71,8 @@ function setup() {
      doggo.addAnimation('zombie', zombieAnimation);
     doggo.scale = 1.3;
 
-
+    console.log(doggo);
+    doggo.setSpeed(20);
 }
 
 
@@ -80,12 +81,13 @@ function draw () {
     image(bgImg, bgX, bgY);
    
         if(!doggoJumping){
-        moveDoggo();
+        // moveDoggo();
     }
     
     doggo.collide(bone);
 
     if(doggo.collide(bone)){
+        doggo.setSpeed(-20, 0);
         doggo.changeAnimation('zombie')
     }
 
@@ -117,7 +119,7 @@ function resetJumping(){
 }
 
 function moveDoggo(){
-    doggo.setSpeed(1, 0);
+    
 }
 
 function driftDown(){
