@@ -35,7 +35,7 @@ function preload(){
     // bone = loadImage('https://res.cloudinary.com/dsdqeqlzj/image/upload/v1603732830/bone0_pmul7k.png');
     boneAnimation = loadAnimation('bone0.png');
     doggoAnimation = loadAnimation('dong0.png', 'dong5.png');
-    zombieAnimation = loadAnimation('log.png')
+    zombieAnimation = loadAnimation('log1.png')
 
 
     //doggoImg = loadImage('https://res.cloudinary.com/dsdqeqlzj/image/upload/v1603732830/dong0.png');
